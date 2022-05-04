@@ -2,12 +2,12 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBhZtd0CT_ipSpHIS4v2oCKqXlwsA__K4M",
-    authDomain: "organizacao-688aa.firebaseapp.com",
-    projectId: "organizacao-688aa",
-    storageBucket: "organizacao-688aa.appspot.com",
-    messagingSenderId: "750880168400",
-    appId: "1:750880168400:web:92d3c45e7b8291f542c1d5"
+    apiKey: "AIzaSyDga9M1qDdpe7YiUSqtl_fjej0Vx07kPwQ",
+    authDomain: "organizacao-c796f.firebaseapp.com",
+    projectId: "organizacao-c796f",
+    storageBucket: "organizacao-c796f.appspot.com",
+    messagingSenderId: "210864414775",
+    appId: "1:210864414775:web:8610bab34d6840ed611fb2"
 };
 
 let app;
@@ -20,4 +20,4 @@ if (firebase.apps.length === 0) {
 
 const db = app.firestore();
 
-export default db;
+export default db; 

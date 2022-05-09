@@ -48,8 +48,8 @@ export default class DashboardScreen extends Component {
                 </View>
                 {!tasks[0]
                     ? (
-                        <View style={styles.noneStory}>
-                            <Text style={styles.noneStoryText}>Nenhuma Tarefa disponível
+                        <View style={styles.noneTask}>
+                            <Text style={styles.noneTaskText}>Nenhuma Tarefa disponível
                             </Text>
                         </View>
                     )
@@ -113,16 +113,16 @@ const styles = StyleSheet.create({
     cardContainer: {
         flex: 0.85
     },
-    noneStory: {
+    noneTask: {
         flex: 0.85,
         justifyContent: 'center',
         alignItems: 'center'
     },
-    noneStoryText: {
+    noneTaskText: {
         color: 'white',
         fontSize: RFValue(40)
     },
-    noneStoryTextLight: {
+    noneTaskTextLight: {
         color: 'black',
         fontSize: RFValue(40)
     }

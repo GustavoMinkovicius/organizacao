@@ -12,9 +12,8 @@ import {
     Alert
 } from "react-native";
 
-import {getAuth, signInWithEmailAndPassword} from "firebase/auth"
+import firebase from "firebase";
 
-const auth = getAuth();
 export default class LoginScreen extends Component {
     constructor(props) {
         super(props);
@@ -25,16 +24,15 @@ export default class LoginScreen extends Component {
     }
 
     login = (email, senha) => {
-        // firebase .auth() .signInWithEmailAndPassword(email, senha) .then(()=>{
-        // this.props.navigation.navigate('DashboardScreen') }) .catch(error=>{
-        // Alert.alert(error.message) })
-
-        signInWithEmailAndPassword(auth, email, senha).then(() => {
-            this.props.navigation.navigate('DashboardScreen')
-        }).catch((error) => {
-          Alert.alert(error.message)
-        });
-
+      firebase
+      .auth()
+      .signInWithEmailAndPassword(email, senha)
+      .then(() => {
+        this.props.navigation.navigate("DashboardScreen");
+      })
+      .catch(error => {
+        Alert.alert(error.message);
+      });
     }
 
     render() {

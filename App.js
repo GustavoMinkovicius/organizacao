@@ -4,14 +4,15 @@ import { createSwitchNavigator, createAppContainer } from "react-navigation";
 import LoginScreen from "./screens/LoginScreen";
 import LoadingScreen from "./screens/LoadingScreen";
 import DashboardScreen from "./screens/DashboardScreen";
-
-import db from './Config';
+import TaskScreen from './screens/TaskScreen';
+import db from './config';
 
 
 const AppSwitchNavigator = createSwitchNavigator({
   // LoadingScreen: LoadingScreen,
   LoginScreen: LoginScreen,
-  DashboardScreen: DashboardScreen
+  DashboardScreen: DashboardScreen, 
+  TaskScreen: TaskScreen
 })
 
 const AppNavigator = createAppContainer(AppSwitchNavigator)

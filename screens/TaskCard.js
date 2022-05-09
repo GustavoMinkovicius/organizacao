@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import {RFValue} from "react-native-responsive-fontsize";
 // import firebase from "firebase";
-
+ 
 export default class TaskCard extends Component {
     render() {
         let task = this.props.task

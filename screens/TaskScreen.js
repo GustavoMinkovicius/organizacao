@@ -11,14 +11,14 @@ import {
     Dimensions,
     TouchableOpacity
 } from "react-native";
+import { Button } from "react-native-elements";
 import {RFValue} from "react-native-responsive-fontsize";
 
-let task = require("../temp_tasks.json");
+
  
 export default class TaskScreen extends Component {
-    
     // componentDidMount() {
-    //     this.fetchUser();
+    //     // this.fetchUser();
     // }
 
     // fetchUser = () => {
@@ -37,43 +37,54 @@ export default class TaskScreen extends Component {
     // };
 
     render() {
+        let task = this.props.navigation.state.params.task
+        // let task = {
+        //     "titulo": "Trabalho de Quimica",
+        //     "data_cadastro": "25/01/2021",
+        //     "data_limite": "05/05/2022",
+        //     "data_conclusao":"25/12/2022",
+        //     "status":"Concluido",
+        //     "descricao": "Fazer o trabalho de Quimica da pág. 147 a 153."
+        //   }
             return (
+                // <View>
+                //     <Text>teste</Text>
+                // </View>
                 <View style={styles.container}>
                     <SafeAreaView style={styles.droidSafeArea}/>
-                    <View style={styles.appTitle}>
+                    <View>
+                        <TouchableOpacity 
+                            style={styles.button}
+                            onPress={() => this.props.navigation.navigate('DashboardScreen')}>
+                            <Text style={styles.buttonText}>Voltar</Text>
+                        </TouchableOpacity>
 
-                        <View style={styles.appTitleTextContainer}>
-                            <Text style={styles.appTitleText}>Organização</Text>
-                        </View>
+                        <Text style={styles.appTitleText}>Organização</Text>
+                           
                     </View>
                     <View style={styles.storyContainer}>
                         <ScrollView style={styles.storyCard}>   
-                            <View style={styles.dataContainer}>
-                                <View style={styles.titleTextContainer}>
-                                    <Text style={styles.storyTitleText}>
-                                        {task.titulo}
-                                    </Text>
-                                    <Text style={styles.storyAuthorText}>
-                                        {task.data_limite}
-                                    </Text>
-                                    <Text style={styles.storyAuthorText}>
-                                        {task.data_cadastro}
-                                    </Text>
-                                    <Text style={styles.storyAuthorText}>
-                                        {task.data_conclusao}
-                                    </Text>
-                                </View>
-                                <View style={styles.iconContainer}></View>
+                            <View style={styles.titleTextContainer}>
+                                <Text style={styles.storyTitleText}>
+                                    {task.titulo}
+                                </Text>
+                                <Text style={styles.storyAuthorText}>
+                                    Data Limite: {task.data_limite}
+                                </Text>
+                                <Text style={styles.storyAuthorText}> 
+                                    Status: {task.status}
+                                </Text> 
                             </View>
+
                             <View style={styles.storyTextContainer}>
-                                <Text style={styles.storyText}> Status: 
-                                    {task.status}
-                                </Text>
                                 <Text style={styles.moralText}>
-                                    descrição: {task.descricao}
+                                    Descrição: {task.descricao}
                                 </Text>
                             </View>
-                            <View style={styles.actionContainer}>
+                            <View style={styles.viewTaskStatus}>
+                                <Text style={styles.taskStatus}> 
+                                    {task.status==='Pendente'? <Text/> : <text >Concluido em: {task.data_conclusao}</text>}
+                                </Text>
                             </View>
                         </ScrollView>
                     </View>
@@ -96,15 +107,6 @@ const styles = StyleSheet.create({
             ? StatusBar.currentHeight
             : RFValue(35)
     },
-    appTitle: {
-        flex: 0.07,
-        flexDirection: "row"
-    },
-    appTitleTextLight: {
-        color: "black",
-        fontSize: RFValue(28),
-        fontFamily: "Bubblegum-Sans"
-    },
     appIcon: {
         flex: 0.3,
         justifyContent: "center",
@@ -115,14 +117,11 @@ const styles = StyleSheet.create({
         height: "100%",
         resizeMode: "contain"
     },
-    appTitleTextContainer: {
-        flex: 0.7,
-        justifyContent: "center"
-    },
     appTitleText: {
         color: "white",
         fontSize: RFValue(28),
-        fontFamily: "Bubblegum-Sans"
+        fontWeight:'bold',
+        textAlign:'center'
     },
     storyContainer: {
         flex: 1
@@ -131,19 +130,6 @@ const styles = StyleSheet.create({
         margin: RFValue(20),
         backgroundColor: "#2f345d",
         borderRadius: RFValue(20)
-    },
-    storyCardlight: {
-        margin: RFValue(20),
-        backgroundColor: "white",
-        borderRadius: RFValue(20),
-        shadowColor: 'black',
-        shadowOffset: {
-            width: 3,
-            height: 3
-        },
-        shadowOpacity: 0.5,
-        shadowRadius: 5,
-        elevation: 2
     },
     image: {
         width: "100%",
@@ -161,32 +147,24 @@ const styles = StyleSheet.create({
         flex: 0.8
     },
     storyTitleText: {
-        fontFamily: "Bubblegum-Sans",
         fontSize: RFValue(25),
         color: "white",
         alignItems:'center',
-        alignSelf:'center'
-    },
-    storyTitleTextlight: {
-        fontFamily: "Bubblegum-Sans",
-        fontSize: RFValue(25),
-        color: "black",
-        alignItems:'center',
-        alignSelf:'center'
+        alignSelf:'center',
+        justifyContent:'center'
     },
     storyAuthorText: {
-        fontFamily: "Bubblegum-Sans",
         fontSize: RFValue(18),
         color: "white",
-        alignItems:'center',
+        margin:5, 
+        width:120,
         alignSelf:'center'
+       
     },
-    storyAuthorTextlight: {
-        fontFamily: "Bubblegum-Sans",
-        fontSize: RFValue(18),
-        color: "black",
-        alignItems:'center',
-        alignSelf:'center'
+    storyText: {
+        fontSize: RFValue(20),
+        color: "white",
+        marginLeft:10  
     },
     iconContainer: {
         flex: 0.2
@@ -194,36 +172,15 @@ const styles = StyleSheet.create({
     storyTextContainer: {
         fontSize: RFValue(20),
         color: "white",
-        alignItems:'center',
-        alignSelf:'center'
-    },
-    storyText: {
-        fontFamily: "Bubblegum-Sans",
-        fontSize: RFValue(20),
-        color: "white",
-        alignItems:'center',
-        alignSelf:'center'
-    },
-    storyText: {
-        fontFamily: "Bubblegum-Sans",
-        fontSize: RFValue(20),
-        color: "white",
-        alignItems:'center',
-        alignSelf:'center'
+        justifyContent:'center',
+        marginTop:20
     },
     moralText: {
-        fontFamily: "Bubblegum-Sans",
-        fontSize: RFValue(20),
+        fontSize: RFValue(18),
         color: "white",
         alignItems:'center',
-        alignSelf:'center'
-    },
-    moralTextLight: {
-        fontFamily: "Bubblegum-Sans",
-        fontSize: RFValue(20),
-        color: "black",
-        alignItems:'center',
-        alignSelf:'center'
+        alignSelf:'center',
+        margin:10
     },
     actionContainer: {
         justifyContent: "center",
@@ -232,35 +189,30 @@ const styles = StyleSheet.create({
         alignItems:'center',
         alignSelf:'center'
     },
-    likeButton: {
-        width: RFValue(160),
-        height: RFValue(40),
-        flexDirection: "row",
-        backgroundColor: "#eb3948",
-        justifyContent: "center",
-        alignItems: "center",
-        borderRadius: RFValue(30)
+    viewTaskStatus:{
+        width:150,
+        height:50,
+        alignSelf:'center',
+        justifyContent:'center',
+        marginTop:50
     },
-    dislikedButton: {
-        width: RFValue(160),
-        height: RFValue(40),
-        flexDirection: "row",
-        backgroundColor: "#eb3948",
-        justifyContent: "center",
-        alignItems: "center",
-        borderWidth: 2,
-        borderRadius: RFValue(30)
-    },
-    likeText: {
+    taskStatus:{
+        fontSize: RFValue(18),
         color: "white",
-        fontFamily: "Bubblegum-Sans",
-        fontSize: RFValue(25),
-        marginLeft: RFValue(5)
+        margin:10,
+        justifyContent:'center'
     },
-    likeThemeLight: {
-        color: "black",
-        fontFamily: "Bubblegum-Sans",
-        fontSize: RFValue(25),
-        marginLeft: RFValue(5)
+    button: {
+        width: "20%",
+        height: 25,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#2f345d",
+        borderRadius: 15,
+    },
+    buttonText: {
+        fontSize: 14,
+        color: "#FFFFFF",
+        fontFamily: "Rajdhani_600SemiBold"
     }
 });

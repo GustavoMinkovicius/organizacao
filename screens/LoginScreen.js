@@ -39,7 +39,9 @@ export default class LoginScreen extends Component {
         const {email, senha} = this.state
         return (
             <KeyboardAvoidingView style={styles.container} behavior="padding">
-                <View style={styles.upperContainer}></View>
+                <View style={styles.upperContainer}>
+                    <Text style={styles.upperText}> Organização </Text>
+                </View>
                 <View style={styles.lowerContainer}>
                     <View style={styles.textinputContainer}>
                         <TextInput
@@ -79,18 +81,23 @@ export default class LoginScreen extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#FFFFFF"
+        backgroundColor: "#5f97af"
     },
     bgImage: {
         flex: 1,
         resizeMode: "cover",
         justifyContent: "center"
     },
-
+    upperText:{
+        fontSize:30,
+        color: '#180101',
+        fontWeight:'bold'
+    },
     upperContainer: {
         flex: 0.5,
         justifyContent: "center",
         alignItems: "center"
+        
     },
     appIcon: {
         width: 280,
@@ -117,15 +124,18 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: "#FFFFFF",
         fontFamily: "Rajdhani_600SemiBold",
-        backgroundColor: "#5653D4"
+        backgroundColor: "#5653D4",
+        justifyContent:'center',
+        alignSelf:'center'
     },
     button: {
         width: "43%",
         height: 55,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#F48D20",
-        borderRadius: 15
+        backgroundColor: "#2f345d",
+        borderRadius: 15,
+        alignSelf:'center'
     },
     buttonText: {
         fontSize: 24,

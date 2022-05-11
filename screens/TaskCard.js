@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import {RFValue} from "react-native-responsive-fontsize";
 // import firebase from "firebase";
- 
+
 export default class TaskCard extends Component {
     render() {
         let task = this.props.task
@@ -21,16 +21,16 @@ export default class TaskCard extends Component {
                 style={styles.container}
                 onPress={() => this.props.navigation.navigate("TaskScreen", {task: task})}>
                 <SafeAreaView style={styles.droidSafeArea}/>
-                <View style={styles.cardContainer}>
+                <View style={[styles.cardContainer,{backgroundColor: task.status==='Pendente'? "#2f345d" : "#05bb3d"}]}>
                     <View style={styles.titleContainer}>
                         <Text style={styles.storyTitleText}>
                             {task.titulo}
                         </Text>
-                          <Text style={styles.storyAuthorText}>
-                            {task.status}
-                        </Text>
                         <Text style={styles.descriptionText}>
                             {task.descricao}
+                        </Text>
+                        <Text style={styles.storyAuthorText}>
+                            {task.status}
                         </Text>
                     </View>
                 </View>
@@ -47,12 +47,10 @@ const styles = StyleSheet.create({
     },
     cardContainer: {
         margin: RFValue(13),
-        backgroundColor: "#2f345d",
         borderRadius: RFValue(20)
     },
     cardContainerLight: {
         margin: RFValue(13),
-
         backgroundColor: "white",
         borderRadius: RFValue(20),
         shadowColor: "rgb(0, 0, 0)",
@@ -71,7 +69,7 @@ const styles = StyleSheet.create({
         height: RFValue(250)
     },
     titleContainer: {
-        paddingLeft: RFValue(20),
+        padding: RFValue(20),
         justifyContent: "center"
     },
     titleTextContainer: {
@@ -83,7 +81,9 @@ const styles = StyleSheet.create({
     storyTitleText: {
         fontFamily: "Bubblegum-Sans",
         fontSize: RFValue(25),
-        color: "white"
+        color: "white",
+        marginBottom: RFValue(10),
+        fontWeight:'bold'
     },
     storyTitleTextLight: {
         fontFamily: "Bubblegum-Sans",
@@ -92,26 +92,30 @@ const styles = StyleSheet.create({
     },
     storyAuthorText: {
         fontFamily: "Bubblegum-Sans",
-        fontSize: RFValue(18),
-        color: "white"
+        fontSize: RFValue(15),
+        color: "white",
+        marginLeft:RFValue(5)
     },
     storyAuthorTextLight: {
         fontFamily: "Bubblegum-Sans",
         fontSize: RFValue(18),
-        color: "black"
+        color: "black",
+        marginLeft:RFValue(5)
     },
     descriptionContainer: {
         marginTop: RFValue(5)
     },
     descriptionText: {
         fontFamily: "Bubblegum-Sans",
-        fontSize: RFValue(13),
-        color: "white"
+        fontSize: RFValue(18),
+        color: "white",
+        margin:RFValue(7)
     },
     descriptionTextLight: {
         fontFamily: "Bubblegum-Sans",
         fontSize: RFValue(13),
-        color: "black"
+        color: "black",
+        margin:RFValue(7)
     },
     actionContainer: {
         justifyContent: "center",

@@ -42,9 +42,12 @@ export default class DashboardScreen extends Component {
                     </View>
                     <View style={styles.appTitleTextContainer}>
                         <Text style={styles.appTitleText}>
-                            organização
+                            Organização
                         </Text>
                     </View>
+                </View>
+                <View style={styles.search}>
+
                 </View>
                 {!tasks[0]
                     ? (
@@ -73,7 +76,7 @@ export default class DashboardScreen extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#15193c"
+        backgroundColor: "#5f97af"
     },
     containerLight: {
         flex: 1,
@@ -104,7 +107,8 @@ const styles = StyleSheet.create({
     },
     appTitleText: {
         color: "white",
-        fontSize: RFValue(28)
+        fontSize: RFValue(28),
+        fontWeight:'bold'
     },
     appTitleTextLight: {
         color: "black",

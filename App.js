@@ -5,14 +5,16 @@ import LoginScreen from "./screens/LoginScreen";
 import LoadingScreen from "./screens/LoadingScreen";
 import DashboardScreen from "./screens/DashboardScreen";
 import TaskScreen from './screens/TaskScreen';
+import CreateTaskScreen from './screens/CreateTaksScreen';
 import db from './config';
 
 
 const AppSwitchNavigator = createSwitchNavigator({
-  // LoadingScreen: LoadingScreen,
+  LoadingScreen: LoadingScreen,
   LoginScreen: LoginScreen,
   DashboardScreen: DashboardScreen, 
-  TaskScreen: TaskScreen
+  TaskScreen: TaskScreen,
+  CreateTaskScreen: CreateTaskScreen
 })
 
 const AppNavigator = createAppContainer(AppSwitchNavigator)

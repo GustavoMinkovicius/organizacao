@@ -11,7 +11,6 @@ import {
     Dimensions,
     TouchableOpacity
 } from "react-native";
-import { Button } from "react-native-elements";
 import {RFValue} from "react-native-responsive-fontsize";
 
 
@@ -68,26 +67,33 @@ export default class TaskScreen extends Component {
                                 <Text style={styles.storyTitleText}>
                                     {task.titulo}
                                 </Text>
-                                <Text style={styles.storyAuthorText}>
-                                    Data Limite: {task.data_limite}
-                                </Text>
-                                <Text style={styles.storyAuthorText}> 
-                                    Status: {task.status}
-                                </Text> 
-                            </View>
-
-                            <View style={styles.storyTextContainer}>
-                                <Text style={styles.moralText}>
-                                    Descrição: {task.descricao}
-                                </Text>
-                            </View>
-                            <View style={styles.viewTaskStatus}>
-                                <Text style={styles.taskStatus}> 
-                                    {task.status==='Pendente'? <Text/> : <text >Concluido em: {task.data_conclusao}</text>}
-                                </Text>
+                                <View style={styles.StatusTask}>
+                                    <Text style={styles.storyAuthorText}>
+                                        <b>Data Limite: </b>{task.data_limite}
+                                    </Text>
+                                    <Text style={styles.storyAuthorText}> 
+                                        <b>Status: </b>{task.status}
+                                    </Text> 
+                                </View>
+                                    <Text style={styles.taskStatus}>
+                                        <b>Descrição: </b> {task.descricao}
+                                    </Text>
+                                    {task.status==='Concluído' && <Text style={styles.taskStatus}>
+                                        <b>Concluído em: </b> {task.data_conclusao}
+                                    </Text>}
                             </View>
                         </ScrollView>
+                        <View>
+                        <TouchableOpacity 
+                            style={[styles.button, {backgroundColor:'red', marginBottom:RFValue(35)}]}
+                            // onPress={() => this.props.navigation.navigate('DashboardScreen')}
+                            >
+                            <Text style={styles.buttonText}>Excluir</Text>
+                        </TouchableOpacity>
+
+                        </View>
                     </View>
+                    
                 </View>
             );
         }
@@ -96,7 +102,7 @@ export default class TaskScreen extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#15193c"
+        backgroundColor: "#5f97af"
     },
     containerLight: {
         flex: 1,
@@ -128,7 +134,6 @@ const styles = StyleSheet.create({
     },
     storyCard: {
         margin: RFValue(20),
-        backgroundColor: "#2f345d",
         borderRadius: RFValue(20)
     },
     image: {
@@ -144,21 +149,21 @@ const styles = StyleSheet.create({
         padding: RFValue(20)
     },
     titleTextContainer: {
-        flex: 0.8
+        flex: 1
     },
     storyTitleText: {
         fontSize: RFValue(25),
         color: "white",
         alignItems:'center',
         alignSelf:'center',
-        justifyContent:'center'
+        justifyContent:'center',
+        fontWeight:'bold'
     },
     storyAuthorText: {
         fontSize: RFValue(18),
         color: "white",
         margin:5, 
-        width:120,
-        alignSelf:'center'
+        width:140,
        
     },
     storyText: {
@@ -172,7 +177,6 @@ const styles = StyleSheet.create({
     storyTextContainer: {
         fontSize: RFValue(20),
         color: "white",
-        justifyContent:'center',
         marginTop:20
     },
     moralText: {
@@ -180,7 +184,9 @@ const styles = StyleSheet.create({
         color: "white",
         alignItems:'center',
         alignSelf:'center',
-        margin:10
+        marginTop:10,
+        marginBottom:10,
+        marginHorizontal:5
     },
     actionContainer: {
         justifyContent: "center",
@@ -199,8 +205,9 @@ const styles = StyleSheet.create({
     taskStatus:{
         fontSize: RFValue(18),
         color: "white",
-        margin:10,
-        justifyContent:'center'
+        marginVertical:10,
+        justifyContent:'center',
+        marginHorizontal:5
     },
     button: {
         width: "20%",
@@ -209,10 +216,17 @@ const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: "#2f345d",
         borderRadius: 15,
+        marginLeft: RFValue(20),
     },
     buttonText: {
         fontSize: 14,
         color: "#FFFFFF",
         fontFamily: "Rajdhani_600SemiBold"
+    },
+    StatusTask:{
+        flex:1,
+        flexDirection:'row',
+        justifyContent:'space-between',
+        marginTop:10
     }
 });

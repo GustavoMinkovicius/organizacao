@@ -6,7 +6,8 @@ import {
     SafeAreaView,
     Platform,
     StatusBar,
-    Image
+    Image,
+    TouchableOpacity
 } from "react-native";
 import {RFValue} from "react-native-responsive-fontsize";
 import TaskCard from "./TaskCard";
@@ -64,10 +65,15 @@ export default class DashboardScreen extends Component {
                                 renderItem={this.renderItem}/>
                         </View>
                     )}
-
+                    <View style={styles.addView}>
+                        <TouchableOpacity style={styles.addButton}onPress={() => this.props.navigation.navigate("CreateTaskScreen")}>
+                        <Text style={styles.addButtonText}>+</Text>
+                        </TouchableOpacity>
+                    </View>
                 <View style={{
                     flex: 0.08
                 }}/>
+           
             </View>
         );
     }
@@ -129,5 +135,16 @@ const styles = StyleSheet.create({
     noneTaskTextLight: {
         color: 'black',
         fontSize: RFValue(40)
+    },
+    addButtonText:{
+        color:'white',
+        fontSize: RFValue(15)
+    },
+    addButton:{
+        color:'green',
+        borderRadius:RFValue(10)
+    },  
+    addView:{
+        
     }
 });

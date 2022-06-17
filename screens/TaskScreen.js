@@ -9,35 +9,55 @@ import {
     Image,
     ScrollView,
     Dimensions,
-    TouchableOpacity
+    TouchableOpacity,
+    Alert
 } from "react-native";
 import {RFValue} from "react-native-responsive-fontsize";
+import {getTasks} from  '../services/tasks'
+import {getData} from '../services/file.js'
+import firebase from 'firebase'
 
-
- 
 export default class TaskScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
             tasks:[],
-            
+            db:[]
         };
-    }
-    componentDidMount(){
+    } 
+    async componentDidMount(){ 
+        var id = await getData("user_id")
+        var x = await  getTasks(id)
+        this.setState({db:x})
+
         let task = this.props.navigation.state.params.atividade
-        console.log(task.data_limite)
+        task.data_atividade = new Date(task.data_limite.seconds * 1000 + task.data_limite.nanoseconds/1000000).toLocaleDateString()
+        {task.status==='Concluído'?
+        task.data_atividadeC = new Date(task.data_conclusao.seconds * 1000 + task.data_conclusao.nanoseconds/1000000).toLocaleDateString()
+        : task.data_atividadeC = 'null'}
         this.setState({tasks:task})
         
     }   
-    saveArticle() {
-        firebase.firestore().collection('articles').add({ 
-          title: this.state.title,
-          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-        })
-      }
+    async deletTask(apagar){
+        var confirmar 
+        this.state.db.toString()
+        // Alert.alert("Deseja apagar a atividade?"
+        //     [
+        //         {
+        //             text: "Não",
+        //             onPress: () => confirmar = 'não',
+        //             style: "cancel"
+        //         },
+        //         { text: "Sim", onPress: () => confirmar = 'sim'}    
+        //     ]
+        // );
+        // confirmar === 'não'? confirmar = '' :
+        const res = await firebase.firestore().collection(this.state.db).doc().delete();
+        this.props.navigation.navigate("DashboardScreen");
+    }
     render() {
         const {tasks} = this.state
-        var teste  = firebase.firestore.Timestamp.toDate()
+        // var teste  = firebase.firestore.Timestamp.data_limite.toDate()
         return (
             <View style={styles.container}>
                 <SafeAreaView style={styles.droidSafeArea}/>
@@ -55,11 +75,11 @@ export default class TaskScreen extends Component {
                     <ScrollView style={styles.storyCard}>   
                         <View style={styles.titleTextContainer}>
                             <Text style={styles.storyTitleText}>
-                                {tasks.titulo}
+                                {tasks.titulo}  
                             </Text>
-                            <View style={styles.StatusTask}>
+                            <View style={styles.StatusTask}> 
                                 <Text style={styles.storyAuthorText}>
-                                    <b>Data Limite: </b>{teste}
+                                    <b>Data Limite: </b>{tasks.data_atividade}
                                 </Text>
                                 <Text style={styles.storyAuthorText}> 
                                     <b>Status: </b>{this.state.tasks.status}
@@ -68,15 +88,15 @@ export default class TaskScreen extends Component {
                                 <Text style={styles.taskStatus}>
                                     <b>Descrição: </b> {this.state.tasks.descricao}
                                 </Text>
-                                {/* {this.state.tasks.status==='Concluído' && <Text style={styles.taskStatus}>
-                                    <b>Concluído em: </b> {this.state.tasks.data_conclusao}
-                                </Text>} */}
+                                {tasks.status==='Concluído' && <Text style={styles.taskStatus}>
+                                    <b>Concluído em: </b> {tasks.data_atividadeC}
+                                </Text>}
                         </View>
                     </ScrollView>
                     <View>
                     <TouchableOpacity 
                         style={[styles.button, {backgroundColor:'red', marginBottom:RFValue(35)}]}
-                        // onPress={() => this.props.navigation.navigate('DashboardScreen')}
+                        onPress={() => this.deletTask(tasks)}
                         >
                         <Text style={styles.buttonText}>Excluir</Text>
                     </TouchableOpacity>

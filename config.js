@@ -7,6 +7,7 @@ import { REACT_APP_API_KEY,
 import firebase from "firebase";
 require("@firebase/firestore");
 
+
 const firebaseConfig = {
     apiKey:  REACT_APP_API_KEY,
     authDomain:  REACT_APP_AUTH_DOMAIN,

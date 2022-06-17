@@ -13,7 +13,7 @@ import {RFValue} from "react-native-responsive-fontsize";
 import TaskCard from "./TaskCard";
 import {FlatList} from "react-native-gesture-handler";
 import {getData} from '../services/file.js'
-import {getTasks, getDataLimite} from  '../services/tasks'
+import {getTasks} from  '../services/tasks'
 // import firebase from "firebase";
 
 
@@ -27,7 +27,6 @@ export default class DashboardScreen extends Component {
     async componentDidMount(){
         var id = await getData("user_id")
         var x = await  getTasks(id)
-        console.log(x)
         this.setState({tasks:x})
     }
     renderItem = ({item: tasks}) => {

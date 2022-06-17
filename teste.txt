@@ -12,80 +12,73 @@ import {
     TouchableOpacity
 } from "react-native";
 import {RFValue} from "react-native-responsive-fontsize";
-
+import {getData} from '../services/file.js'
+import {getTasks} from  '../services/tasks'
 
  
 export default class TaskScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            tasks:[],
-            
+            tasks:[]
         };
     }
-    componentDidMount(){
-        let task = this.props.navigation.state.params.atividade
-        console.log(task.data_limite)
-        this.setState({tasks:task})
-        
-    }   
-    saveArticle() {
-        firebase.firestore().collection('articles').add({ 
-          title: this.state.title,
-          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-        })
-      }
+    async componentDidMount(){
+        var id = await getData("user_id")
+        var x = await  getTasks(id)
+        console.log(x)
+        this.setState({tasks:x})
+    }
     render() {
-        const {tasks} = this.state
-        var teste  = firebase.firestore.Timestamp.toDate()
-        return (
-            <View style={styles.container}>
-                <SafeAreaView style={styles.droidSafeArea}/>
-                <View>
-                    <TouchableOpacity 
-                        style={styles.button}
-                        onPress={() => this.props.navigation.navigate('DashboardScreen')}>
-                        <Text style={styles.buttonText}>Voltar</Text>
-                    </TouchableOpacity>
-
-                    <Text style={styles.appTitleText}>Organização</Text>
-                       
-                </View>
-                <View style={styles.storyContainer}>
-                    <ScrollView style={styles.storyCard}>   
-                        <View style={styles.titleTextContainer}>
-                            <Text style={styles.storyTitleText}>
-                                {tasks.titulo}
-                            </Text>
-                            <View style={styles.StatusTask}>
-                                <Text style={styles.storyAuthorText}>
-                                    <b>Data Limite: </b>{teste}
-                                </Text>
-                                <Text style={styles.storyAuthorText}> 
-                                    <b>Status: </b>{this.state.tasks.status}
-                                </Text> 
-                            </View>
-                                <Text style={styles.taskStatus}>
-                                    <b>Descrição: </b> {this.state.tasks.descricao}
-                                </Text>
-                                {/* {this.state.tasks.status==='Concluído' && <Text style={styles.taskStatus}>
-                                    <b>Concluído em: </b> {this.state.tasks.data_conclusao}
-                                </Text>} */}
-                        </View>
-                    </ScrollView>
+        let task = this.props.navigation.state.params.atividade
+            return (
+                <View style={styles.container}>
+                    <SafeAreaView style={styles.droidSafeArea}/>
                     <View>
-                    <TouchableOpacity 
-                        style={[styles.button, {backgroundColor:'red', marginBottom:RFValue(35)}]}
-                        // onPress={() => this.props.navigation.navigate('DashboardScreen')}
-                        >
-                        <Text style={styles.buttonText}>Excluir</Text>
-                    </TouchableOpacity>
+                        <TouchableOpacity 
+                            style={styles.button}
+                            onPress={() => this.props.navigation.navigate('DashboardScreen')}>
+                            <Text style={styles.buttonText}>Voltar</Text>
+                        </TouchableOpacity>
 
+                        <Text style={styles.appTitleText}>Organização</Text>
+                           
                     </View>
+                    <View style={styles.storyContainer}>
+                        <ScrollView style={styles.storyCard}>   
+                            <View style={styles.titleTextContainer}>
+                                <Text style={styles.storyTitleText}>
+                                    {this.state.tasks.titulo}
+                                </Text>
+                                <View style={styles.StatusTask}>
+                                    <Text style={styles.storyAuthorText}>
+                                        <b>Data Limite: </b>{this.state.tasks.data_limite}
+                                    </Text>
+                                    <Text style={styles.storyAuthorText}> 
+                                        <b>Status: </b>{this.state.tasks.status}
+                                    </Text> 
+                                </View>
+                                    <Text style={styles.taskStatus}>
+                                        <b>Descrição: </b> {this.state.tasks.descricao}
+                                    </Text>
+                                    {this.state.tasks.status==='Concluído' && <Text style={styles.taskStatus}>
+                                        <b>Concluído em: </b> {this.state.tasks.data_conclusao}
+                                    </Text>}
+                            </View>
+                        </ScrollView>
+                        <View>
+                        <TouchableOpacity 
+                            style={[styles.button, {backgroundColor:'red', marginBottom:RFValue(35)}]}
+                            // onPress={() => this.props.navigation.navigate('DashboardScreen')}
+                            >
+                            <Text style={styles.buttonText}>Excluir</Text>
+                        </TouchableOpacity>
+
+                        </View>
+                    </View>
+                    
                 </View>
-                
-            </View>
-        );
+            );
         }
     }
 
@@ -220,3 +213,4 @@ const styles = StyleSheet.create({
         marginTop:10
     }
 });
+    

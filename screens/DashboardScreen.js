@@ -11,9 +11,9 @@ import {
 } from "react-native";
 import {RFValue} from "react-native-responsive-fontsize";
 import TaskCard from "./TaskCard";
-import {getTasks} from  '../services/tasks'
 import {FlatList} from "react-native-gesture-handler";
 import {getData} from '../services/file.js'
+import {getTasks, getDataLimite} from  '../services/tasks'
 // import firebase from "firebase";
 
 
@@ -30,8 +30,8 @@ export default class DashboardScreen extends Component {
         console.log(x)
         this.setState({tasks:x})
     }
-    renderItem = ({item: task}) => {
-        return <TaskCard task={task} navigation={this.props.navigation}/>;
+    renderItem = ({item: tasks}) => {
+        return <TaskCard task={tasks} navigation={this.props.navigation}/>;
     };
 
     keyExtractor = (item, index) => index.toString();

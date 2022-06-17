@@ -11,7 +11,6 @@ import {
     TouchableOpacity
 } from "react-native";
 import {RFValue} from "react-native-responsive-fontsize";
-
 // import firebase from "firebase";
 
 export default class TaskCard extends Component {
@@ -19,8 +18,8 @@ export default class TaskCard extends Component {
         let task = this.props.task
         return (
             <TouchableOpacity
-                style={styles.container} 
-                onPress={() => this.props.navigation.navigate("TaskScreen", {task: task})}>
+                style={styles.container}
+                onPress={() => this.props.navigation.navigate("TaskScreen", {atividade: task})}>
                 <SafeAreaView style={styles.droidSafeArea}/>
                 <View style={[styles.cardContainer,{backgroundColor: task.status==='Pendente'? "#2f345d" : "#05bb3d"}]}>
                     <View style={styles.titleContainer}>

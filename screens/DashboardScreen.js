@@ -11,14 +11,25 @@ import {
 } from "react-native";
 import {RFValue} from "react-native-responsive-fontsize";
 import TaskCard from "./TaskCard";
-
+import {getTasks} from  '../services/tasks'
 import {FlatList} from "react-native-gesture-handler";
+import {getData} from '../services/file.js'
 // import firebase from "firebase";
 
-let tasks = require("../temp_tasks.json");
 
 export default class DashboardScreen extends Component {
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            tasks:[]
+        };
+    }
+    async componentDidMount(){
+        var id = await getData("user_id")
+        var x = await  getTasks(id)
+        console.log(x)
+        this.setState({tasks:x})
+    }
     renderItem = ({item: task}) => {
         return <TaskCard task={task} navigation={this.props.navigation}/>;
     };
@@ -50,7 +61,7 @@ export default class DashboardScreen extends Component {
                 <View style={styles.search}>
 
                 </View>
-                {!tasks[0]
+                {!this.state.tasks[0]
                     ? (
                         <View style={styles.noneTask}>
                             <Text style={styles.noneTaskText}>Nenhuma Tarefa disponível
@@ -61,7 +72,7 @@ export default class DashboardScreen extends Component {
                         <View style={styles.cardContainer}>
                             <FlatList
                                 keyExtractor={this.keyExtractor}
-                                data={tasks}
+                                data={this.state.tasks}
                                 renderItem={this.renderItem}/>
                         </View>
                     )}

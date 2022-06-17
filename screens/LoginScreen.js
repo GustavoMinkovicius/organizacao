@@ -11,8 +11,8 @@ import {
     ToastAndroid,
     Alert
 } from "react-native";
-
-import firebase from "firebase";
+import firebase from "firebase"
+import {getData, storeData} from '../services/file.js'
 
 export default class LoginScreen extends Component {
     constructor(props) {
@@ -22,12 +22,21 @@ export default class LoginScreen extends Component {
             senha: ''
         };
     }
+    async componentDidMount(){
+        var id = await getData("user_id")
+        if(id){
+            this.props.navigation.navigate("DashboardScreen");
+        }
+    }
 
     login = (email, senha) => {
       firebase
       .auth()
       .signInWithEmailAndPassword(email, senha)
-      .then(() => {
+      .then(async(response) => {
+        var user = response.user
+        console.log(user.uid)
+        await storeData("user_id",user.uid)
         this.props.navigation.navigate("DashboardScreen");
       })
       .catch(error => {

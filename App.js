@@ -15,12 +15,12 @@ const AppSwitchNavigator = createSwitchNavigator({
   DashboardScreen: DashboardScreen, 
   TaskScreen: TaskScreen,
   CreateTaskScreen: CreateTaskScreen
-})
+},{initialRouteName:LoginScreen.name})
 
 const AppNavigator = createAppContainer(AppSwitchNavigator)
 
 export default function App() {
   return (
-    <AppNavigator />
+    <AppNavigator/>
   )
 }

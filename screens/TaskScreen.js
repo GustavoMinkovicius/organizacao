@@ -15,6 +15,7 @@ import {
 import {RFValue} from "react-native-responsive-fontsize";
 import {getTasks} from  '../services/tasks'
 import {getData} from '../services/file.js'
+import { deleteTask } from "../services/clear";
 import firebase from 'firebase'
 
 export default class TaskScreen extends Component {
@@ -22,25 +23,28 @@ export default class TaskScreen extends Component {
         super(props);
         this.state = {
             tasks:[],
-            db:[]
         };
     } 
     async componentDidMount(){ 
         var id = await getData("user_id")
         var x = await  getTasks(id)
+        
         this.setState({db:x})
-
         let task = this.props.navigation.state.params.atividade
+
         task.data_atividade = new Date(task.data_limite.seconds * 1000 + task.data_limite.nanoseconds/1000000).toLocaleDateString()
         {task.status==='Concluído'?
+
         task.data_atividadeC = new Date(task.data_conclusao.seconds * 1000 + task.data_conclusao.nanoseconds/1000000).toLocaleDateString()
         : task.data_atividadeC = 'null'}
+
         this.setState({tasks:task})
+        console.log(this.state.tasks)
         
     }   
     async deletTask(apagar){
-        var confirmar 
-        this.state.db.toString()
+        console.log(apagar.data_atividade)
+        var confirmar  
         // Alert.alert("Deseja apagar a atividade?"
         //     [
         //         {
@@ -52,8 +56,7 @@ export default class TaskScreen extends Component {
         //     ]
         // );
         // confirmar === 'não'? confirmar = '' :
-        const res = await firebase.firestore().collection(this.state.db).doc().delete();
-        this.props.navigation.navigate("DashboardScreen");
+        await deleteTask(apagar.id)
     }
     render() {
         const {tasks} = this.state

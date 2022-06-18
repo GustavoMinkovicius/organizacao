@@ -45,19 +45,20 @@ export default class TaskScreen extends Component {
     async deletTask(apagar){
         console.log(apagar.data_atividade)
         var confirmar  
-        // Alert.alert("Deseja apagar a atividade?"
-        //     [
-        //         {
-        //             text: "Não",
-        //             onPress: () => confirmar = 'não',
-        //             style: "cancel"
-        //         },
-        //         { text: "Sim", onPress: () => confirmar = 'sim'}    
-        //     ]
-        // );
-        // confirmar === 'não'? confirmar = '' :
+        Alert.alert("Deseja apagar a atividade?"
+            [
+                {
+                    text: "Não",
+                    onPress: () => confirmar = 'não',
+                    style: "cancel"
+                },
+                { text: "Sim", onPress: () => confirmar = 'sim'}    
+            ]
+        );
+        confirmar === 'não'? confirmar = '' :
         await deleteTask(apagar.id)
-    }
+        this.props.navigation.navigate('DashboardScreen')}
+    
     render() {
         const {tasks} = this.state
         // var teste  = firebase.firestore.Timestamp.data_limite.toDate()
@@ -109,8 +110,8 @@ export default class TaskScreen extends Component {
                 
             </View>
         );
-        }
     }
+}
 
 const styles = StyleSheet.create({
     container: {

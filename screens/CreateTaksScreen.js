@@ -13,6 +13,7 @@ import {
     TextInput
 } from "react-native";
 import {RFValue} from "react-native-responsive-fontsize";
+import DatePicker from "react-native-date-picker";
 
 export default class CreateTaskScreen extends Component {
     constructor(props) {
@@ -20,11 +21,16 @@ export default class CreateTaskScreen extends Component {
         this.state = {
             tiulo: '',
             descricao: '',
-            data_limite:''
+            data_limite:'',
+            data_cadastro:'',
+            data_conclusao:'',
+            status:'',
+            user_id:''
         };
     }
     render() {
         const {tiulo, descricao} = this.state
+        const [date, setDate] = useState(new Date())
         return (
             <View style={styles.container}>
                 <SafeAreaView style={styles.droidSafeArea}/>
@@ -62,6 +68,8 @@ export default class CreateTaskScreen extends Component {
                     value={descricao}
                     onChangeText={text => this.setState({descricao: text})}
                     />
+                    <Button title="Data Limite" onPress={() => setOpen(true)}/>
+                    <DatePicker date={date} onDateChange={setDate} mode="date" />
                     
                 </View>
                 <View>

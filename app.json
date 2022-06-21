@@ -20,6 +20,10 @@
       "supportsTablet": true
     },
     "android": {
+      "read_calendar":[],
+      "write_calendar":[],
+      "package": "com.GUSTAVOSM.organizacao",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"

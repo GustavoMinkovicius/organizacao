@@ -17,6 +17,7 @@ import {getTasks} from  '../services/tasks'
 import {getData} from '../services/file.js'
 import { deleteTask } from "../services/clear";
 import firebase from 'firebase'
+import moment from "moment";
 
 export default class TaskScreen extends Component {
     constructor(props) {
@@ -33,15 +34,21 @@ export default class TaskScreen extends Component {
         let task = this.props.navigation.state.params.atividade
 
         task.data_atividade = new Date(task.data_limite.seconds * 1000 + task.data_limite.nanoseconds/1000000).toLocaleDateString()
-        {task.status==='Concluído'?
+        {task.status==="Concluído"?
 
         task.data_atividadeC = new Date(task.data_conclusao.seconds * 1000 + task.data_conclusao.nanoseconds/1000000).toLocaleDateString()
-        : task.data_atividadeC = 'null'}
+        : task.data_atividadeC = null}
 
         this.setState({tasks:task})
         console.log(this.state.tasks)
-        
+
     }   
+    async concluirTask(id){
+        await firebase.firestore().collection('task').doc(id).update({
+            status: "Concluído",
+            data_conclusao: new Date(id.data_conclusao.seconds * 1000 + id.data_conclusao.nanoseconds/1000000).toDate()
+          })   
+    }
     async deletTask(apagar){
         console.log(apagar.data_atividade)
         var confirmar  
@@ -92,22 +99,25 @@ export default class TaskScreen extends Component {
                                 <Text style={styles.taskStatus}>
                                     <b>Descrição: </b> {this.state.tasks.descricao}
                                 </Text>
-                                {tasks.status==='Concluído' && <Text style={styles.taskStatus}>
+                                {tasks.status==="Concluído" && <Text style={[styles.taskStatus]}>
                                     <b>Concluído em: </b> {tasks.data_atividadeC}
                                 </Text>}
+
+                                {tasks.status==='Pendente' && <TouchableOpacity style={[styles.buttonC,{backgroundColor:'green', marginTop:RFValue(35)}]} 
+                                onPress={()=>  this.concluirTask(tasks.id) && this.props.navigation.navigate('DashboardScreen')}>
+                                    <Text style={styles.buttonText}> Concluir </Text>
+                                </TouchableOpacity> }
                         </View>
                     </ScrollView>
                     <View>
                     <TouchableOpacity 
-                        style={[styles.button, {backgroundColor:'red', marginBottom:RFValue(35)}]}
+                        style={[styles.button, {backgroundColor:'red', marginBottom:RFValue(35)}]} 
                         onPress={() => this.deletTask(tasks)}
                         >
                         <Text style={styles.buttonText}>Excluir</Text>
                     </TouchableOpacity>
-
                     </View>
-                </View>
-                
+                </View>      
             </View>
         );
     }
@@ -231,6 +241,15 @@ const styles = StyleSheet.create({
         backgroundColor: "#2f345d",
         borderRadius: 15,
         marginLeft: RFValue(20),
+    },
+    buttonC: {
+        width: "40%",
+        height: 45,
+        justifyContent: "center",
+        alignItems: "center",
+        alignSelf:'center',
+        backgroundColor: "#2f345d",
+        borderRadius: 15
     },
     buttonText: {
         fontSize: 14,

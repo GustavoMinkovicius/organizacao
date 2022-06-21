@@ -10,10 +10,11 @@ import {
     ScrollView,
     Dimensions,
     TouchableOpacity,
-    TextInput
+    TextInput,
+    Button
 } from "react-native";
 import {RFValue} from "react-native-responsive-fontsize";
-import DatePicker from "react-native-date-picker";
+import CalendarPicker from 'react-native-calendar-picker';
 
 export default class CreateTaskScreen extends Component {
     constructor(props) {
@@ -21,16 +22,23 @@ export default class CreateTaskScreen extends Component {
         this.state = {
             tiulo: '',
             descricao: '',
-            data_limite:'',
+            data_limite:null,
             data_cadastro:'',
             data_conclusao:'',
             status:'',
             user_id:''
         };
+        this.onDateChange = this.onDateChange.bind(this);
     }
+    onDateChange(date) {
+        this.setState({
+         data_limite: date,
+        });
+      }
     render() {
         const {tiulo, descricao} = this.state
-        const [date, setDate] = useState(new Date())
+        const { data_limite} = this.state;
+        const startDate = data_limite? data_limite.toString() : '';
         return (
             <View style={styles.container}>
                 <SafeAreaView style={styles.droidSafeArea}/>
@@ -68,9 +76,12 @@ export default class CreateTaskScreen extends Component {
                     value={descricao}
                     onChangeText={text => this.setState({descricao: text})}
                     />
-                    <Button title="Data Limite" onPress={() => setOpen(true)}/>
-                    <DatePicker date={date} onDateChange={setDate} mode="date" />
-                    
+                    <View>
+                        <Text style={styles.data}>Selecione a Data Limite: </Text>
+                        <TouchableOpacity onPress={this.props.navigation.navigate('DataScreen')}/>
+                    <CalendarPicker onDateChange={this.onDateChange}/>
+                    </View>
+                   
                 </View>
                 <View>
                 <TouchableOpacity style={[styles.buttonAdd, {backgroundColor:'green', marginBottom:RFValue(35)}]}
@@ -175,4 +186,11 @@ const styles = StyleSheet.create({
         color: "#cfeff7",
         fontFamily: "Rajdhani_600SemiBold"
     },
+    data:{
+        fontSize:18,
+        color:'#fff',
+        justifyContent:'center',
+        marginLeft: RFValue(20)
+
+    }
 });

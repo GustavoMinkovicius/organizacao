@@ -1,23 +1,23 @@
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/firestore';
+import { REACT_APP_API_KEY,
+    REACT_APP_AUTH_DOMAIN,
+    REACT_APP_PROJECT_ID,
+    REACT_APP_STORAGE_BUCKET,
+    REACT_APP_MESSAGING_SENDER_ID,
+    REACT_APP_APP_ID} from "@env"
+import firebase from "firebase";
+require("@firebase/firestore");
+
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDga9M1qDdpe7YiUSqtl_fjej0Vx07kPwQ",
-    authDomain: "organizacao-c796f.firebaseapp.com",
-    projectId: "organizacao-c796f",
-    storageBucket: "organizacao-c796f.appspot.com",
-    messagingSenderId: "210864414775",
-    appId: "1:210864414775:web:8610bab34d6840ed611fb2"
+    apiKey:  REACT_APP_API_KEY,
+    authDomain:  REACT_APP_AUTH_DOMAIN,
+    projectId: REACT_APP_PROJECT_ID,
+    storageBucket:  REACT_APP_STORAGE_BUCKET,
+    messagingSenderId: REACT_APP_MESSAGING_SENDER_ID,
+    appId:  REACT_APP_APP_ID
 };
+console.log(firebaseConfig)
+firebase.initializeApp(firebaseConfig);
 
-let app;
-
-if (firebase.apps.length === 0) {
-    app = firebase.initializeApp(firebaseConfig)
-} else {
-    app = firebase.app();
-}
-
-const db = app.firestore();
-
-export default db; 
+export default firebase.firestore();
+ 

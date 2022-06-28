@@ -10,3 +10,14 @@ export const getTasks = (id) => {
         console.log(error)
     })
 }
+
+export const addTasks = (task) => {
+    return firebase.firestore().collection('task').add(task).then((response)=>{
+        var x = response.docs.map((doc) => {
+        return { id: doc.id, ...doc.data() }
+      })
+        return x
+    }).catch((error)=>{
+        console.log(error)
+    })
+}

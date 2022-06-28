@@ -27,7 +27,7 @@ export default class TaskScreen extends Component {
         };
     } 
     async componentDidMount(){ 
-        var id = await getData("user_id")
+        var id = await getData("user_id") 
         var x = await  getTasks(id)
         
         this.setState({db:x})
@@ -46,7 +46,7 @@ export default class TaskScreen extends Component {
     async concluirTask(id){
         await firebase.firestore().collection('task').doc(id).update({
             status: "Concluído",
-            data_conclusao: new Date(id.data_conclusao.seconds * 1000 + id.data_conclusao.nanoseconds/1000000).toDate()
+            data_conclusao: new Date()
           })   
     }
     async deletTask(apagar){

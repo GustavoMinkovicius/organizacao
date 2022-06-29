@@ -15,30 +15,45 @@ import {
 } from "react-native";
 import {RFValue} from "react-native-responsive-fontsize";
 import CalendarPicker from 'react-native-calendar-picker';
+import {addTasks} from '../services/tasks'
+import {getData} from '../services/file' 
+import firebase from 'firebase'
+import moment from "moment";
 
 export default class CreateTaskScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            tiulo: '',
-            descricao: '',
-            data_limite:null,
-            data_cadastro:'',
-            data_conclusao:'',
-            status:'',
-            user_id:''
+            data_cadastro: '',
+            data_limite: '' ,
+            descricao: '' ,
+            titulo: '',
+            tasks: ''
         };
         this.onDateChange = this.onDateChange.bind(this);
     }
+
+    addTask = () => {
+        firebase.firestore().collection('task').add({
+            data_cadastro: this.state.data_cadastro,
+            data_conclusao: new Date() ,
+            data_limite: this.state.data_limite ,
+            descricao: this.state.descricao,
+            status: "Pendente",
+            titulo: this.state.titulo,
+            user_id: this.state.tasks
+          });
+          
+          console.log('Added document with ID: ');
+    }
     onDateChange(date) {
-        this.setState({
-         data_limite: date,
-        });
+        this.setState({data_limite: moment(date).toDate()})
       }
+      async componentDidMount(){
+        var id = await getData("user_id")
+        this.setState({tasks:id})
+    }
     render() {
-        const {tiulo, descricao} = this.state
-        const { data_limite} = this.state;
-        const startDate = data_limite? data_limite.toString() : '';
         return (
             <View style={styles.container}>
                 <SafeAreaView style={styles.droidSafeArea}/>
@@ -59,8 +74,8 @@ export default class CreateTaskScreen extends Component {
                     
                     placeholder="Nome da  atividade"
                     placeholderTextColor={"#FFFFFF"}
-                    value={tiulo}
-                    onChangeText={text => this.setState({tiulo: text})}
+                    value={this.state.titulo}
+                    onChangeText={text => this.setState({titulo: text})}
                     />
                     <TextInput
                     style={[
@@ -73,7 +88,7 @@ export default class CreateTaskScreen extends Component {
                     multiline
                     placeholder="Descrição"
                     placeholderTextColor={"#FFFFFF"}
-                    value={descricao}
+                    value={this.state.descricao}
                     onChangeText={text => this.setState({descricao: text})}
                     />
                     <View>
@@ -85,7 +100,7 @@ export default class CreateTaskScreen extends Component {
                 </View>
                 <View>
                 <TouchableOpacity style={[styles.buttonAdd, {backgroundColor:'green', marginBottom:RFValue(35)}]}
-                            // onPress={() => this.props.navigation.navigate('DashboardScreen')}
+                            onPress={() => this.props.navigation.navigate('DashboardScreen') && this.addTask()}
                             >
                             <Text style={styles.buttonTextAdd}>Adicionar</Text>
                         </TouchableOpacity>

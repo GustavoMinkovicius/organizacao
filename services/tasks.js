@@ -21,3 +21,13 @@ export const addTasks = (task) => {
         console.log(error)
     })
 }
+
+export const res = () => {
+ 
+firebase.firestore().collection('task').add({
+    name: 'Tokyo',
+    country: 'Japan'
+  });
+  
+  console.log('Added document with ID: ', res.id);
+}

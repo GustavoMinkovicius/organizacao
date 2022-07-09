@@ -6,6 +6,7 @@ import LoadingScreen from "./screens/LoadingScreen";
 import DashboardScreen from "./screens/DashboardScreen";
 import TaskScreen from './screens/TaskScreen';
 import CreateTaskScreen from './screens/CreateTaksScreen';
+import EditeTask from './screens/EditeTaskScreen';
 import db from './config';
 
 
@@ -14,7 +15,8 @@ const AppSwitchNavigator = createSwitchNavigator({
   LoginScreen: LoginScreen,
   DashboardScreen: DashboardScreen, 
   TaskScreen: TaskScreen,
-  CreateTaskScreen: CreateTaskScreen
+  CreateTaskScreen: CreateTaskScreen,
+  EditeTask:EditeTask
 },{initialRouteName:LoginScreen.name})
 
 const AppNavigator = createAppContainer(AppSwitchNavigator)
@@ -22,5 +24,6 @@ const AppNavigator = createAppContainer(AppSwitchNavigator)
 export default function App() {
   return (
     <AppNavigator/>
+    
   )
 }

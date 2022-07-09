@@ -107,6 +107,11 @@ export default class TaskScreen extends Component {
                                 onPress={()=>  this.concluirTask(tasks.id) && this.props.navigation.navigate('DashboardScreen')}>
                                     <Text style={styles.buttonText}> Concluir </Text>
                                 </TouchableOpacity> }
+                                <TouchableOpacity  
+                                    style={[styles.buttonC, {backgroundColor:'#07174a', marginTop:RFValue(45)}]}
+                                    onPress={() => this.props.navigation.navigate('EditeTask', {task: tasks})}>
+                                    <Text style={styles.buttonText}> Editar atividade </Text>
+                                </TouchableOpacity>
                         </View>
                     </ScrollView>
                     <View>

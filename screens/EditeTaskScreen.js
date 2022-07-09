@@ -62,7 +62,7 @@ export default class EditeTask extends Component {
                 <View>
                     <TouchableOpacity
                         style={styles.button}
-                        onPress={() => this.props.navigation.navigate('TaskScreen')}>
+                        onPress={() => this.props.navigation.navigate('TaskScreen', {atividade:this.props.navigation.state.params.task})}>
                         <Text style={styles.buttonText}>Voltar</Text>
                     </TouchableOpacity>
                     <Text style={styles.appTitleText}>Nova atividade</Text>

@@ -76,7 +76,7 @@ export default class DashboardScreen extends Component {
                         </View>
                     )}
                     <View style={styles.addView}>
-                        <TouchableOpacity style={styles.addButton}onPress={() => this.props.navigation.navigate("CreateTaskScreen")}>
+                        <TouchableOpacity style={styles.addButton} onPress={() => this.props.navigation.navigate("CreateTaskScreen")}>
                         <Text style={styles.addButtonText}>+</Text>
                         </TouchableOpacity>
                     </View>
@@ -148,11 +148,16 @@ const styles = StyleSheet.create({
     },
     addButtonText:{
         color:'white',
-        fontSize: RFValue(15)
+        fontSize: RFValue(30),
+        alignSelf:'center'
     },
     addButton:{
+        backgroundColor: 'green',
         color:'green',
-        borderRadius:RFValue(10)
+        borderRadius: 200/2,
+        width:RFValue(50),
+        height:RFValue(50),
+        marginLeft: RFValue(30)
     },  
     addView:{
         

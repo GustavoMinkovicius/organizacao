@@ -44,7 +44,7 @@ export default class CreateTaskScreen extends Component {
             user_id: this.state.tasks
           });
           
-          console.log('Added document with ID: ');
+          console.log('Atividade criado pelo ID: ', this.state.tasks);
     }
     onDateChange(date) {
         this.setState({data_limite: moment(date).toDate()})

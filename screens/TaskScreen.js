@@ -29,6 +29,7 @@ export default class TaskScreen extends Component {
     async componentDidMount(){ 
         var id = await getData("user_id") 
         var x = await  getTasks(id)
+       
         
         this.setState({db:x})
         let task = this.props.navigation.state.params.atividade
@@ -40,7 +41,6 @@ export default class TaskScreen extends Component {
         : task.data_atividadeC = null}
 
         this.setState({tasks:task})
-        console.log(this.state.tasks)
 
     }   
     async concluirTask(id){
@@ -50,7 +50,6 @@ export default class TaskScreen extends Component {
           })   
     }
     async deletTask(apagar){
-        console.log(apagar.data_atividade)
         var confirmar  
         Alert.alert("Deseja apagar a atividade?"
             [

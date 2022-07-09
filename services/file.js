@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 export const storeData = async (key, value) => {
         try {
-            console.log(key, value)
+            console.log("O ", key, "é: ", value)
           await AsyncStorage.setItem(key, value)
         } catch (e) {
           // saving error
@@ -18,3 +18,5 @@ export const getData = async (key) => {
     }
   }
   
+
+  // file.js é um services criado para impedir que o usuario tenha que fazer o login em sua conta toda vez que desejar entrar no aplicativo

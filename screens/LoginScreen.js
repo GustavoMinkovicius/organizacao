@@ -35,7 +35,6 @@ export default class LoginScreen extends Component {
       .signInWithEmailAndPassword(email, senha)
       .then(async(response) => {
         var user = response.user
-        console.log(user.uid)
         await storeData("user_id",user.uid)
         this.props.navigation.navigate("DashboardScreen");
       })

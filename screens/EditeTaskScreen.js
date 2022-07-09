@@ -24,13 +24,26 @@ export default class EditeTask extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data_limite: '',
-            descricao: '',
-            titulo: '',
-            id:[]
+            data_limite: this.props.navigation.state.params.task.data_limite,
+            descricao: this.props.navigation.state.params.task.descricao,
+            titulo: this.props.navigation.state.params.task.titulo,
+            idi:[]
         };
         this.onDateChange = this.onDateChange.bind(this);
+        
     }
+    // let taski = this.props.navigation.state.params.task
+        
+ 
+
+    async componentDidMount(){ 
+        
+        this.setState({db:x})
+        let taski = this.props.navigation.state.params.task
+
+        console.log(taski.data_limite)
+        this.setState({idi:taski})
+    }   
     async editTask(id){
         await firebase.firestore().collection('task').doc(id).update({
             data_limite: this.state. data_limite,
@@ -38,15 +51,7 @@ export default class EditeTask extends Component {
             titulo: this.state.titulo
           })   
     }
-    componentDidMount(){
-        let task = this.props.navigation.state.params.task
-        this.setState({
-            data_limite: task.data_limite,
-            descricao: task.descricao,
-            titulo: task.titulo
-        })
-        this.setState({id:task})
-    }
+    
 
     onDateChange(date) {
         this.setState({data_limite: moment(date).toDate()})
@@ -56,6 +61,7 @@ export default class EditeTask extends Component {
         this.setState({tasks:id})
     }
     render() {
+        const {idi} = this.state
         return (
             <View style={styles.container}>
                 <SafeAreaView style={styles.droidSafeArea}/>
@@ -65,7 +71,7 @@ export default class EditeTask extends Component {
                         onPress={() => this.props.navigation.navigate('TaskScreen', {atividade:this.props.navigation.state.params.task})}>
                         <Text style={styles.buttonText}>Voltar</Text>
                     </TouchableOpacity>
-                    <Text style={styles.appTitleText}>Nova atividade</Text>
+                    <Text style={styles.appTitleText}>Editar a atividade</Text>
                 </View>
                 <View>
                     <TextInput
@@ -75,7 +81,7 @@ export default class EditeTask extends Component {
                         }]}
                     
                     placeholder="Nome da  atividade"
-                    placeholderTextColor={"#FFFFFF"}
+                    placeholderTextColor={"#FFFFFF"} 
                     value={this.state.titulo}
                     onChangeText={text => this.setState({titulo: text})}
                     />
@@ -102,7 +108,7 @@ export default class EditeTask extends Component {
                 </View>
                 <View>
                 <TouchableOpacity style={[styles.buttonAdd, {backgroundColor:'green', marginBottom:RFValue(35)}]}
-                            onPress={() => this.props.navigation.navigate('DashboardScreen') && this.editTask()}>
+                            onPress={() => this.props.navigation.navigate('DashboardScreen') && this.editTask(this.props.navigation.state.params.task.id)}>
                             
                             <Text style={styles.buttonTextAdd}>Editar</Text>
                         </TouchableOpacity>

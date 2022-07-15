@@ -13,6 +13,7 @@ import {
 } from "react-native";
 import firebase from "firebase"
 import {getData, storeData} from '../services/file.js'
+import {RFValue} from "react-native-responsive-fontsize";
 
 export default class LoginScreen extends Component {
     constructor(props) {
@@ -79,6 +80,9 @@ export default class LoginScreen extends Component {
                             onPress={() => this.login(email, senha)}>
                             <Text style={styles.buttonText}>Entrar</Text>
                         </TouchableOpacity>
+                        <Text onPress={() => this.props.navigation.navigate("Signup")} style={styles.newCountText}>
+                            Criar conta
+                        </Text>
                     </View>
                 </View>
             </KeyboardAvoidingView>
@@ -149,5 +153,11 @@ const styles = StyleSheet.create({
         fontSize: 24,
         color: "#FFFFFF",
         fontFamily: "Rajdhani_600SemiBold"
+    },
+    newCountText:{
+        fontSize: RFValue(15),
+        color: "#22272E",
+        marginTop: RFValue(10),
+        alignSelf:"center"
     }
 });

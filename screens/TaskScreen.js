@@ -78,7 +78,7 @@ export default class TaskScreen extends Component {
                         <Text style={styles.buttonText}>Voltar</Text>
                     </TouchableOpacity>
 
-                    <Text style={styles.appTitleText}>Organização</Text>
+                    <Text style={styles.appTitleText}>Routinezer</Text>
                        
                 </View>
                 <View style={styles.storyContainer}>
@@ -130,7 +130,7 @@ export default class TaskScreen extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#5f97af"
+        backgroundColor: "#00abd6"
     },
     containerLight: {
         flex: 1,

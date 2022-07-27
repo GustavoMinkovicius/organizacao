@@ -49,38 +49,51 @@ export default class LoginScreen extends Component {
         return (
             <KeyboardAvoidingView style={styles.container} behavior="padding">
                 <View style={styles.upperContainer}>
-                    <Text style={styles.upperText}> Organização </Text>
+                    <Text style={styles.upperText}> Routinezer </Text>
                 </View>
                 <View style={styles.lowerContainer}>
                     <View style={styles.textinputContainer}>
+                        <Text style={styles.emailText}>
+                            E-mail
+                        </Text>
                         <TextInput
-                            style={styles.textinput}
+                            style={[
+                                styles.textinput, {
+                                    marginTop: RFValue(5)
+                                }
+                            ]}
                             placeholder={"Digite o email"}
-                            placeholderTextColor={"#FFFFFF"}
+                            placeholderTextColor={"#40416b"}
                             autoFocus
                             value={email}
                             onChangeText={text => this.setState({email: text})}/>
+                            <Text style={styles.senhaText}>
+                                Senha
+                            </Text>
                         <TextInput
                             style={[
                             styles.textinput, {
-                                marginTop: 20
+                                marginTop: RFValue(5)
                             }
                         ]}
                             placeholder={"Digite a senha"}
-                            placeholderTextColor={"#FFFFFF"}
+                            placeholderTextColor={"#40416b"}
                             value={senha}
                             secureTextEntry
                             onChangeText={text => this.setState({senha: text})}/>
                         <TouchableOpacity
                             style={[
                             styles.button, {
-                                marginTop: 20
+                                marginTop: RFValue(20)
                             }
                         ]}
                             onPress={() => this.login(email, senha)}>
-                            <Text style={styles.buttonText}>Entrar</Text>
+                            <Text style={styles.buttonText}>Login</Text>
                         </TouchableOpacity>
-                        <Text onPress={() => this.props.navigation.navigate("Signup")} style={styles.newCountText}>
+                        <Text style={styles.newCountText}>
+                            Não possui uma conta?
+                        </Text>
+                        <Text onPress={() => this.props.navigation.navigate("Signup")} style={[styles.newCountText,{color:'#418dc6'}]}>
                             Criar conta
                         </Text>
                     </View>
@@ -93,7 +106,7 @@ export default class LoginScreen extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#5f97af"
+        backgroundColor: "#ffffff"
     },
     bgImage: {
         flex: 1,
@@ -102,7 +115,7 @@ const styles = StyleSheet.create({
     },
     upperText:{
         fontSize:30,
-        color: '#180101',
+        color: '#00054a',
         fontWeight:'bold'
     },
     upperContainer: {
@@ -124,40 +137,52 @@ const styles = StyleSheet.create({
     },
     lowerContainer: {
         flex: 0.5,
-        alignItems: "center"
     },
     textinput: {
-        width: "75%",
+        width: "90%",
         height: 55,
         padding: 10,
-        borderColor: "#FFFFFF",
-        borderWidth: 4,
-        borderRadius: 10,
+        borderColor: "#40416b",
+        borderWidth: 1,
+        borderRadius: 100,
         fontSize: 18,
-        color: "#FFFFFF",
+        color: "#28284e",
         fontFamily: "Rajdhani_600SemiBold",
-        backgroundColor: "#5653D4",
+        backgroundColor: "#ffffff",
         justifyContent:'center',
         alignSelf:'center'
     },
     button: {
-        width: "43%",
+        width: "90%",
         height: 55,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#2f345d",
-        borderRadius: 15,
-        alignSelf:'center'
+        backgroundColor: "#2535ff",
+        borderRadius: 100,
+        alignSelf:'center',
+        marginTop:RFValue(20)
     },
     buttonText: {
         fontSize: 24,
-        color: "#FFFFFF",
-        fontFamily: "Rajdhani_600SemiBold"
+        color: "#edeeff"
     },
     newCountText:{
         fontSize: RFValue(15),
         color: "#22272E",
         marginTop: RFValue(10),
         alignSelf:"center"
+    },
+    emailText:{
+        color:'#5e6776',
+        fontSize:RFValue(15),
+        marginLeft:RFValue(20),
+        alignSelf:'flex-start'
+    },
+    senhaText:{
+        color:'#5e6776',
+        marginTop:RFValue(5),
+        fontSize:RFValue(15),
+        marginLeft:RFValue(20),
+        alignSelf:'flex-start'
     }
 });

@@ -20,6 +20,7 @@ import {getData} from '../services/file'
 import firebase from 'firebase'
 import moment from "moment";
 
+
 export default class CreateTaskScreen extends Component {
     constructor(props) {
         super(props);
@@ -73,7 +74,7 @@ export default class CreateTaskScreen extends Component {
                         }]}
                     
                     placeholder="Nome da  atividade"
-                    placeholderTextColor={"#FFFFFF"}
+                    placeholderTextColor={"#494979"}
                     value={this.state.titulo}
                     onChangeText={text => this.setState({titulo: text})}
                     />
@@ -87,14 +88,16 @@ export default class CreateTaskScreen extends Component {
                     numberOfLines={5}
                     multiline
                     placeholder="Descrição"
-                    placeholderTextColor={"#FFFFFF"}
+                    placeholderTextColor={"#494979"}
                     value={this.state.descricao}
                     onChangeText={text => this.setState({descricao: text})}
                     />
                     <View>
                         <Text style={styles.data}>Selecione a Data Limite: </Text>
                         <TouchableOpacity onPress={this.props.navigation.navigate('DataScreen')}/>
-                    <CalendarPicker onDateChange={this.onDateChange}/>
+                        <View style={styles.calendarpicker}>
+                            <CalendarPicker onDateChange={this.onDateChange}/>
+                        </View>
                     </View>
                    
                 </View>
@@ -113,7 +116,7 @@ export default class CreateTaskScreen extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#5f97af"
+        backgroundColor: "#00abd6"
     },
     containerLight: {
         flex: 1,
@@ -177,13 +180,13 @@ const styles = StyleSheet.create({
         width: "75%",
         height: 55,
         padding: 10,
-        borderColor: "#FFFFFF",
+        borderColor: "#494979",
         borderWidth: 4,
         borderRadius: 10,
         fontSize: 18,
-        color: "#FFFFFF",
+        color: "#494979",
         fontFamily: "Rajdhani_600SemiBold",
-        backgroundColor: "#5653D4",
+        backgroundColor: "#f7f7ff",
         justifyContent:'center',
         marginLeft: RFValue(20)
       },
@@ -205,7 +208,11 @@ const styles = StyleSheet.create({
         fontSize:18,
         color:'#fff',
         justifyContent:'center',
-        marginLeft: RFValue(20)
+        marginLeft: RFValue(20),
+        marginBottom:RFValue(5)
 
+    },
+    calendarpicker:{
+        backgroundColor:'#1271c5'
     }
 });

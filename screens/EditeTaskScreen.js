@@ -102,15 +102,17 @@ export default class EditeTask extends Component {
                     <View>
                         <Text style={styles.data}>Selecione a Data Limite: </Text>
                         <TouchableOpacity onPress={this.props.navigation.navigate('DataScreen')}/>
-                    <CalendarPicker onDateChange={this.onDateChange}/>
+                        <View style={styles.calendarpicker}>
+                            <CalendarPicker onDateChange={this.onDateChange}/>
+                        </View>
                     </View>
                    
                 </View>
                 <View>
-                <TouchableOpacity style={[styles.buttonAdd, {backgroundColor:'green', marginBottom:RFValue(35)}]}
+                <TouchableOpacity style={[styles.buttonAdd, {backgroundColor:'#1271c5', marginBottom:RFValue(35), marginTop:RFValue(35)}]}
                             onPress={() => this.props.navigation.navigate('DashboardScreen') && this.editTask(this.props.navigation.state.params.task.id)}>
                             
-                            <Text style={styles.buttonTextAdd}>Editar</Text>
+                            <Text style={styles.buttonTextAdd}>Salvar</Text>
                         </TouchableOpacity>
                 </View>
             </View>
@@ -121,7 +123,7 @@ export default class EditeTask extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#5f97af"
+        backgroundColor: "#00abd6"
     },
     containerLight: {
         flex: 1,
@@ -185,13 +187,13 @@ const styles = StyleSheet.create({
         width: "75%",
         height: 55,
         padding: 10,
-        borderColor: "#FFFFFF",
+        borderColor: "#494979",
         borderWidth: 4,
         borderRadius: 10,
         fontSize: 18,
-        color: "#FFFFFF",
+        color: "#494979",
         fontFamily: "Rajdhani_600SemiBold",
-        backgroundColor: "#5653D4",
+        backgroundColor: "#f7f7ff",
         justifyContent:'center',
         marginLeft: RFValue(20)
       },
@@ -213,7 +215,11 @@ const styles = StyleSheet.create({
         fontSize:18,
         color:'#fff',
         justifyContent:'center',
-        marginLeft: RFValue(20)
+        marginLeft: RFValue(20),
+        marginBottom:RFValue(5)
 
+    },
+    calendarpicker:{
+        backgroundColor:'#1271c5'
     }
 });

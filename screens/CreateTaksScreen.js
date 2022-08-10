@@ -11,7 +11,8 @@ import {
     Dimensions,
     TouchableOpacity,
     TextInput,
-    Button
+    Button,
+    Alert
 } from "react-native";
 import {RFValue} from "react-native-responsive-fontsize";
 import CalendarPicker from 'react-native-calendar-picker';
@@ -103,7 +104,9 @@ export default class CreateTaskScreen extends Component {
                 </View>
                 <View>
                 <TouchableOpacity style={[styles.buttonAdd, {backgroundColor:'green', marginBottom:RFValue(35)}]}
-                            onPress={() => this.props.navigation.navigate('DashboardScreen') && this.addTask()}
+                            onPress={() => this.props.navigation.navigate('DashboardScreen') &&  this.state.titulo && this.state.data_limite && this.state.descricao===''? 
+                            Alert.alert("preencha todas as caixas")
+                            :this.addTask()}
                             >
                             <Text style={styles.buttonTextAdd}>Adicionar</Text>
                         </TouchableOpacity>

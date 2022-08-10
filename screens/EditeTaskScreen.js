@@ -81,7 +81,7 @@ export default class EditeTask extends Component {
                         }]}
                     
                     placeholder="Nome da  atividade"
-                    placeholderTextColor={"#FFFFFF"} 
+                    placeholderTextColor={"#494979"}
                     value={this.state.titulo}
                     onChangeText={text => this.setState({titulo: text})}
                     />
@@ -95,7 +95,7 @@ export default class EditeTask extends Component {
                     numberOfLines={5}
                     multiline
                     placeholder="Descrição"
-                    placeholderTextColor={"#FFFFFF"}
+                    placeholderTextColor={"#494979"}
                     value={this.state.descricao}
                     onChangeText={text => this.setState({descricao: text})}
                     />

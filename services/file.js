@@ -18,5 +18,12 @@ export const getData = async (key) => {
     }
   }
   
+export const RemoveData = async (key)=> {
+  try{
+    await AsyncStorage.removeItem(key)
+  }catch (e){
+    console.log(e)
+  }
+}
 
   // file.js é um services criado para impedir que o usuario tenha que fazer o login em sua conta toda vez que desejar entrar no aplicativo

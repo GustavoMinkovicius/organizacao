@@ -21,17 +21,20 @@ export default class TaskCard extends Component {
                 style={styles.container}
                 onPress={() => this.props.navigation.navigate("TaskScreen", {atividade: task})}>
                 <SafeAreaView style={styles.droidSafeArea}/>
-                <View style={[styles.cardContainer,{backgroundColor: task.status==='Pendente'? "#2f345d" : "#05bb3d"}]}>
+                <View style={[styles.cardContainer,{backgroundColor:"#fff"}]}>
                     <View style={styles.titleContainer}>
                         <Text style={styles.storyTitleText}>
                             {task.titulo}
                         </Text>
-                        <Text style={styles.descriptionText}>
-                            {task.descricao}
-                        </Text>
+                            <Text style={styles.descriptionText}>
+                                {task.descricao}
+                            </Text>
+                        <View style={styles.viewImage}>
+                            <Image source={task.status === 'Pendente'? "../assets/pendente.png": "../assets/concluido.png"} style={styles.iconImage}/>
                         <Text style={styles.storyAuthorText}>
                             {task.status}
                         </Text>
+                        </View>
                     </View>
                 </View>
             </TouchableOpacity>
@@ -45,13 +48,20 @@ const styles = StyleSheet.create({
             ? StatusBar.currentHeight
             : 0
     },
+    container:{
+        margin:5,
+        borderRadius:20,
+        borderColor:'black'
+    },
     cardContainer: {
-        margin: RFValue(13),
-        borderRadius: RFValue(20)
+        margin: RFValue(10),
+        borderRadius: RFValue(20),
+        borderColor:'#98c8af',
+        borderWidth:5
     },
     cardContainerLight: {
         margin: RFValue(13),
-        backgroundColor: "white",
+        backgroundColor: "black",
         borderRadius: RFValue(20),
         shadowColor: "rgb(0, 0, 0)",
         shadowOffset: {
@@ -81,7 +91,7 @@ const styles = StyleSheet.create({
     storyTitleText: {
         fontFamily: "Bubblegum-Sans",
         fontSize: RFValue(25),
-        color: "white",
+        color: "#208ad8",
         marginBottom: RFValue(10),
         fontWeight:'bold'
     },
@@ -93,7 +103,7 @@ const styles = StyleSheet.create({
     storyAuthorText: {
         fontFamily: "Bubblegum-Sans",
         fontSize: RFValue(15),
-        color: "white",
+        color: "#84829e",
         marginLeft:RFValue(5)
     },
     storyAuthorTextLight: {
@@ -108,7 +118,7 @@ const styles = StyleSheet.create({
     descriptionText: {
         fontFamily: "Bubblegum-Sans",
         fontSize: RFValue(18),
-        color: "white",
+        color: "#000000",
         margin:RFValue(7)
     },
     descriptionTextLight: {
@@ -140,6 +150,16 @@ const styles = StyleSheet.create({
         backgroundColor: "#eb3948",
         borderWidth: 2,
         borderRadius: RFValue(30)
+    },
+    iconImage: {
+        height: 40,
+        width: 40,
+        resizeMode: "center",
+        alignSelf:'flex-end'
+
+    },
+    viewImage:{
+        justifyContent:'center',
     },
     likeText: {
         color: "white",
